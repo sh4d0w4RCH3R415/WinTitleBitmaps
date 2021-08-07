@@ -26,6 +26,19 @@ Bitmap maximize = Bitmaps.Instance[32, Color.White, BitmapType.Maximize];
 Bitmap minimize = Bitmaps.Instance[32, Color.White, BitmapType.Minimize];
 Bitmap restore  = Bitmaps.Instance[32, Color.White, BitmapType.Restore];
 Bitmap help     = Bitmaps.Instance[32, Color.White, BitmapType.Help];
+
+// just pretend I modified the properties of these PictureBox controls
+PictureBox myPicBox1 = new PictureBox();
+PictureBox myPicBox2 = new PictureBox();
+PictureBox myPicBox3 = new PictureBox();
+PictureBox myPicBox4 = new PictureBox();
+PictureBox myPicBox5 = new PictureBox();
+
+myPicBox1.Image = close;
+myPicBox2.Image = maximize;
+myPicBox3.Image = minimize;
+myPicBox4.Image = restore;
+myPicBox5.Image = help;
 ```
 
 ### Bitmap Generation Results
