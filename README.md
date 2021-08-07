@@ -43,3 +43,6 @@ myPicBox5.Image = help;
 
 ### Bitmap Generation Results
 ![](https://github.com/sh4d0w4RCH3R415/WinTitleBitmaps/blob/master/screenshot%20of%20bitmaps.PNG)
+
+### Download
+[WinTitleBitmaps.dll](https://github.com/sh4d0w4RCH3R415/releases/download/1.0.0/WinTitleBitmaps.dll)
