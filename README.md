@@ -27,3 +27,6 @@ Bitmap minimize = Bitmaps.Instance[32, Color.White, BitmapType.Minimize];
 Bitmap restore  = Bitmaps.Instance[32, Color.White, BitmapType.Restore];
 Bitmap help     = Bitmaps.Instance[32, Color.White, BitmapType.Help];
 ```
+
+### Bitmap Generation Results
+![](https://github.com/sh4d0w4RCH3R415/WinTitleBitmaps/blob/master/screenshot%20of%20bitmaps.PNG)
