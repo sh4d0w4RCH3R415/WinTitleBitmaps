@@ -27,6 +27,3 @@ Bitmap minimize = Bitmaps.Instance[32, Color.White, BitmapType.Minimize];
 Bitmap restore  = Bitmaps.Instance[32, Color.White, BitmapType.Restore];
 Bitmap help     = Bitmaps.Instance[32, Color.White, BitmapType.Help];
 ```
-
-### What The Bitmaps Look Like
-![Screenshot](screenshot of bitmaps.PNG)
