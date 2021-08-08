@@ -24,11 +24,11 @@ public sealed class Bitmaps
 using System.Drawing;
 using System.Windows.Forms;
 
-Bitmap close    = Bitmaps.Instance[32, Color.White, BitmapType.Close];
-Bitmap maximize = Bitmaps.Instance[32, Color.White, BitmapType.Maximize];
-Bitmap minimize = Bitmaps.Instance[32, Color.White, BitmapType.Minimize];
-Bitmap restore  = Bitmaps.Instance[32, Color.White, BitmapType.Restore];
-Bitmap help     = Bitmaps.Instance[32, Color.White, BitmapType.Help];
+Bitmap close    = Bitmaps.Instance[32, Color.Black, BitmapType.Close];
+Bitmap maximize = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize];
+Bitmap minimize = Bitmaps.Instance[32, Color.Black, BitmapType.Minimize];
+Bitmap restore  = Bitmaps.Instance[32, Color.Black, BitmapType.Restore];
+Bitmap help     = Bitmaps.Instance[32, Color.Black, BitmapType.Help];
 
 // just pretend I modified the properties of these PictureBox controls
 PictureBox myPicBox1 = new PictureBox();
