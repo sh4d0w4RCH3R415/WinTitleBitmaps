@@ -1,6 +1,8 @@
 ## WinTitleBitmaps
 ### Description
-Contains images that were drawn with code free to use for your window's titlebar if its a custom window!
+Contains images that were drawn with code free to use for your window's titlebar if its a custom window!<br/>
+
+Btw, I recommend setting the `SizeMode` of your `PictureBox` to be `PictureBoxSizeMode.CenterImage`, just so that it looks normal, and nice.
 
 ### How To Use
 #### Quick Parameter Documentation
