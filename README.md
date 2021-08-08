@@ -13,7 +13,7 @@ public sealed class Bitmaps
 {
     public static Bitmaps Instance => new Bitmaps();
 
-    public static Bitmap this[int BmpSize, Color BmpColor, BitmapType BmpType]
+    public Bitmap this[int BmpSize, Color BmpColor, BitmapType BmpType]
     {
         /* insert complex drawing code here */
     }
