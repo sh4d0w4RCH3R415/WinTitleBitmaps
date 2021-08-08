@@ -22,6 +22,7 @@ public sealed class Bitmaps
 #### Actual "How To Use" Code
 ```csharp
 using System.Drawing;
+using System.Windows.Forms;
 
 Bitmap close    = Bitmaps.Instance[32, Color.White, BitmapType.Close];
 Bitmap maximize = Bitmaps.Instance[32, Color.White, BitmapType.Maximize];
