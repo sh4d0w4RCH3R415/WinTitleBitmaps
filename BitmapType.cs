@@ -29,6 +29,26 @@ public enum BitmapType
 	/// Generate a 'question mark' shape.
 	/// </summary>
 	Help = 395839,
+
+	/// <summary>
+	/// Generate a 'down arrow' shape.
+	/// </summary>
+	DownArrow = 928482,
+
+	/// <summary>
+	/// Generate an 'up arrow' shape.
+	/// </summary>
+	UpArrow = 727932,
+
+	/// <summary>
+	/// Generate a 'left arrow' shape.
+	/// </summary>
+	LeftArrow = 294832,
+
+	/// <summary>
+	/// Generate a 'right arrow' shape.
+	/// </summary>
+	RightArrow = 727589,
 }
 
 public static class BitmapTypeExtensions
@@ -42,7 +62,7 @@ public static class BitmapTypeExtensions
 	/// </returns>
 	public static BitmapType ToBmpType(this int ID)
 	{
-		if (ID == 874892 || ID == 473282 || ID == 183783 || ID == 927582 || ID == 395839)
+		if (ID == (int)BitmapType.Close || ID == (int)BitmapType.Maximize || ID == (int)BitmapType.Minimize || ID == (int)BitmapType.Restore || ID == (int)BitmapType.Help || ID == (int)BitmapType.DownArrow || ID == (int)BitmapType.UpArrow || ID == (int)BitmapType.LeftArrow || ID == (int)BitmapType.RightArrow)
 		{
 			return (BitmapType)ID;
 		}
@@ -58,7 +78,7 @@ public static class BitmapTypeExtensions
 	/// </returns>
 	public static BitmapType ToBmpType(this uint ID)
 	{
-		if (ID == 874892 || ID == 473282 || ID == 183783 || ID == 927582 || ID == 395839)
+		if (ID == (int)BitmapType.Close || ID == (int)BitmapType.Maximize || ID == (int)BitmapType.Minimize || ID == (int)BitmapType.Restore || ID == (int)BitmapType.Help || ID == (int)BitmapType.DownArrow || ID == (int)BitmapType.UpArrow || ID == (int)BitmapType.LeftArrow || ID == (int)BitmapType.RightArrow)
 		{
 			return (BitmapType)ID;
 		}

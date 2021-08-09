@@ -9,11 +9,15 @@ namespace Demo
 		{
 			InitializeComponent();
 
-			picClose.Image    = Bitmaps.Instance[32, Color.Black, BitmapType.Close];
-			picMaximize.Image = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize];
-			picMinimize.Image = Bitmaps.Instance[32, Color.Black, BitmapType.Minimize];
-			picRestore.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.Restore];
-			picHelp.Image     = Bitmaps.Instance[32, Color.Black, BitmapType.Help];
+			picClose.Image      = Bitmaps.Instance[32, Color.Black, BitmapType.Close     ];
+			picMaximize.Image   = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize  ];
+			picMinimize.Image   = Bitmaps.Instance[32, Color.Black, BitmapType.Minimize  ];
+			picRestore.Image    = Bitmaps.Instance[32, Color.Black, BitmapType.Restore   ];
+			picHelp.Image       = Bitmaps.Instance[32, Color.Black, BitmapType.Help      ];
+			picDownArrow.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.DownArrow ];
+			picUpArrow.Image    = Bitmaps.Instance[32, Color.Black, BitmapType.UpArrow   ];
+			picLeftArrow.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.LeftArrow ];
+			picRightArrow.Image = Bitmaps.Instance[32, Color.Black, BitmapType.RightArrow];
 		}
 	}
 }

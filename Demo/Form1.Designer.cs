@@ -34,11 +34,19 @@ namespace Demo
 			this.picMinimize = new System.Windows.Forms.PictureBox();
 			this.picRestore = new System.Windows.Forms.PictureBox();
 			this.picHelp = new System.Windows.Forms.PictureBox();
+			this.picUpArrow = new System.Windows.Forms.PictureBox();
+			this.picDownArrow = new System.Windows.Forms.PictureBox();
+			this.picRightArrow = new System.Windows.Forms.PictureBox();
+			this.picLeftArrow = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.picClose)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picMaximize)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picMinimize)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picRestore)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.picHelp)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.picUpArrow)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.picDownArrow)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.picRightArrow)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.picLeftArrow)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// picClose
@@ -91,10 +99,54 @@ namespace Demo
 			this.picHelp.TabIndex = 4;
 			this.picHelp.TabStop = false;
 			// 
+			// picUpArrow
+			// 
+			this.picUpArrow.BackColor = System.Drawing.SystemColors.ControlLight;
+			this.picUpArrow.Location = new System.Drawing.Point(233, 203);
+			this.picUpArrow.Name = "picUpArrow";
+			this.picUpArrow.Size = new System.Drawing.Size(32, 32);
+			this.picUpArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.picUpArrow.TabIndex = 6;
+			this.picUpArrow.TabStop = false;
+			// 
+			// picDownArrow
+			// 
+			this.picDownArrow.BackColor = System.Drawing.SystemColors.ControlLight;
+			this.picDownArrow.Location = new System.Drawing.Point(195, 203);
+			this.picDownArrow.Name = "picDownArrow";
+			this.picDownArrow.Size = new System.Drawing.Size(32, 32);
+			this.picDownArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.picDownArrow.TabIndex = 5;
+			this.picDownArrow.TabStop = false;
+			// 
+			// picRightArrow
+			// 
+			this.picRightArrow.BackColor = System.Drawing.SystemColors.ControlLight;
+			this.picRightArrow.Location = new System.Drawing.Point(309, 203);
+			this.picRightArrow.Name = "picRightArrow";
+			this.picRightArrow.Size = new System.Drawing.Size(32, 32);
+			this.picRightArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.picRightArrow.TabIndex = 8;
+			this.picRightArrow.TabStop = false;
+			// 
+			// picLeftArrow
+			// 
+			this.picLeftArrow.BackColor = System.Drawing.SystemColors.ControlLight;
+			this.picLeftArrow.Location = new System.Drawing.Point(271, 203);
+			this.picLeftArrow.Name = "picLeftArrow";
+			this.picLeftArrow.Size = new System.Drawing.Size(32, 32);
+			this.picLeftArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.picLeftArrow.TabIndex = 7;
+			this.picLeftArrow.TabStop = false;
+			// 
 			// Form1
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(579, 349);
+			this.Controls.Add(this.picRightArrow);
+			this.Controls.Add(this.picLeftArrow);
+			this.Controls.Add(this.picUpArrow);
+			this.Controls.Add(this.picDownArrow);
 			this.Controls.Add(this.picHelp);
 			this.Controls.Add(this.picRestore);
 			this.Controls.Add(this.picMinimize);
@@ -110,6 +162,10 @@ namespace Demo
 			((System.ComponentModel.ISupportInitialize)(this.picMinimize)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.picRestore)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.picHelp)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.picUpArrow)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.picDownArrow)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.picRightArrow)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.picLeftArrow)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -121,6 +177,10 @@ namespace Demo
 		private System.Windows.Forms.PictureBox picMinimize;
 		private System.Windows.Forms.PictureBox picRestore;
 		private System.Windows.Forms.PictureBox picHelp;
+		private System.Windows.Forms.PictureBox picUpArrow;
+		private System.Windows.Forms.PictureBox picDownArrow;
+		private System.Windows.Forms.PictureBox picRightArrow;
+		private System.Windows.Forms.PictureBox picLeftArrow;
 	}
 }
 

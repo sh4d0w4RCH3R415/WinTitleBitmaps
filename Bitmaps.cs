@@ -8,6 +8,7 @@ using System.Drawing.Text;
 public sealed class Bitmaps
 {
 	private const int pos = 8;
+	private const float angline = 1.50005f;
 
 	/// <summary>
 	/// An auto-generated instance of the <see cref="Bitmaps"/> type.
@@ -43,8 +44,8 @@ public sealed class Bitmaps
 					using (Graphics gfx = Graphics.FromImage(bmp))
 					{
 						gfx.SmoothingMode = SmoothingMode.HighQuality;
-						gfx.DrawLines(new Pen(BmpColor, 1.50005f), line1);
-						gfx.DrawLines(new Pen(BmpColor, 1.50005f), line2);
+						gfx.DrawLines(new Pen(BmpColor, angline), line1);
+						gfx.DrawLines(new Pen(BmpColor, angline), line2);
 					}
 					break;
 				case BitmapType.Maximize:
@@ -105,13 +106,57 @@ public sealed class Bitmaps
 					}
 					break;
 				case BitmapType.Help:
-					Rectangle textrect = new Rectangle(0, -1, BmpSize, BmpSize);
-					Brush textbrush = new SolidBrush(BmpColor);
+					Rectangle textrect1 = new Rectangle(0, -1, BmpSize, BmpSize);
+					Brush textbrush1 = new SolidBrush(BmpColor);
 
 					using (Graphics gfx = Graphics.FromImage(bmp))
 					{
 						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-						gfx.DrawString("s", new Font("Webdings", 12f), textbrush, textrect,
+						gfx.DrawString("s", new Font("Webdings", 12f), textbrush1, textrect1,
+							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+					}
+					break;
+				case BitmapType.DownArrow:
+					Rectangle textrect2 = new Rectangle(1, 1, BmpSize, BmpSize);
+					Brush textbrush2 = new SolidBrush(BmpColor);
+
+					using (Graphics gfx = Graphics.FromImage(bmp))
+					{
+						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+						gfx.DrawString("5", new Font("Webdings", 12f), textbrush2, textrect2,
+							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+					}
+					break;
+				case BitmapType.UpArrow:
+					Rectangle textrect3 = new Rectangle(1, 0, BmpSize, BmpSize);
+					Brush textbrush3 = new SolidBrush(BmpColor);
+
+					using (Graphics gfx = Graphics.FromImage(bmp))
+					{
+						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+						gfx.DrawString("6", new Font("Webdings", 12f), textbrush3, textrect3,
+							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+					}
+					break;
+				case BitmapType.LeftArrow:
+					Rectangle textrect4 = new Rectangle(1, 0, BmpSize, BmpSize);
+					Brush textbrush4 = new SolidBrush(BmpColor);
+
+					using (Graphics gfx = Graphics.FromImage(bmp))
+					{
+						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+						gfx.DrawString("3", new Font("Webdings", 12f), textbrush4, textrect4,
+							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+					}
+					break;
+				case BitmapType.RightArrow:
+					Rectangle textrect5 = new Rectangle(0, 0, BmpSize, BmpSize);
+					Brush textbrush5 = new SolidBrush(BmpColor);
+
+					using (Graphics gfx = Graphics.FromImage(bmp))
+					{
+						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+						gfx.DrawString("4", new Font("Webdings", 12f), textbrush5, textrect5,
 							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 					}
 					break;
