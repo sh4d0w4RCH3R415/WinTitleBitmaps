@@ -39,5 +39,14 @@
     <Compile Include="BitmapType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomBitmaps\question_mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomBitmaps\down.png" />
+    <EmbeddedResource Include="CustomBitmaps\left.png" />
+    <EmbeddedResource Include="CustomBitmaps\right.png" />
+    <EmbeddedResource Include="CustomBitmaps\up.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

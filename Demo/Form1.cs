@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Demo
@@ -9,15 +10,41 @@ namespace Demo
 		{
 			InitializeComponent();
 
-			picClose.Image      = Bitmaps.Instance[32, Color.Black, BitmapType.Close     ];
-			picMaximize.Image   = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize  ];
-			picMinimize.Image   = Bitmaps.Instance[32, Color.Black, BitmapType.Minimize  ];
-			picRestore.Image    = Bitmaps.Instance[32, Color.Black, BitmapType.Restore   ];
-			picHelp.Image       = Bitmaps.Instance[32, Color.Black, BitmapType.Help      ];
-			picDownArrow.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.DownArrow ];
-			picUpArrow.Image    = Bitmaps.Instance[32, Color.Black, BitmapType.UpArrow   ];
-			picLeftArrow.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.LeftArrow ];
-			picRightArrow.Image = Bitmaps.Instance[32, Color.Black, BitmapType.RightArrow];
+			picClose.Image      = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Close     ];
+			picMaximize.Image   = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Maximize  ];
+			picMinimize.Image   = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Minimize  ];
+			picHelp.Image       = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Help      ];
+			picDownArrow.Image  = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.DownArrow ];
+			picUpArrow.Image    = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.UpArrow   ];
+			picLeftArrow.Image  = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.LeftArrow ];
+			picRightArrow.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.RightArrow];
+			
+			picClose.MouseEnter      += new EventHandler(PictureBox_MouseEnter);
+			picMaximize.MouseEnter   += new EventHandler(PictureBox_MouseEnter);
+			picMinimize.MouseEnter   += new EventHandler(PictureBox_MouseEnter);
+			picHelp.MouseEnter       += new EventHandler(PictureBox_MouseEnter);
+			picDownArrow.MouseEnter  += new EventHandler(PictureBox_MouseEnter);
+			picUpArrow.MouseEnter    += new EventHandler(PictureBox_MouseEnter);
+			picLeftArrow.MouseEnter  += new EventHandler(PictureBox_MouseEnter);
+			picRightArrow.MouseEnter += new EventHandler(PictureBox_MouseEnter);
+
+			picClose.MouseLeave      += new EventHandler(PictureBox_MouseLeave);
+			picMaximize.MouseLeave   += new EventHandler(PictureBox_MouseLeave);
+			picMinimize.MouseLeave   += new EventHandler(PictureBox_MouseLeave);
+			picHelp.MouseLeave       += new EventHandler(PictureBox_MouseLeave);
+			picDownArrow.MouseLeave  += new EventHandler(PictureBox_MouseLeave);
+			picUpArrow.MouseLeave    += new EventHandler(PictureBox_MouseLeave);
+			picLeftArrow.MouseLeave  += new EventHandler(PictureBox_MouseLeave);
+			picRightArrow.MouseLeave += new EventHandler(PictureBox_MouseLeave);
+
+			picMaximize.MouseEnter += new EventHandler(Maximize_MouseEnter);
+			picMaximize.MouseLeave += new EventHandler(Maximize_MouseLeave);
 		}
+
+		private void PictureBox_MouseEnter(object sender, EventArgs e) => ((PictureBox)sender).BackColor = Color.Gainsboro;
+		private void PictureBox_MouseLeave(object sender, EventArgs e) => ((PictureBox)sender).BackColor = Color.White;
+
+		private void Maximize_MouseEnter(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Restore];
+		private void Maximize_MouseLeave(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Maximize];
 	}
 }

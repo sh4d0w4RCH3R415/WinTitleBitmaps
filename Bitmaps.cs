@@ -1,19 +1,37 @@
-﻿using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Reflection;
 
 /// <summary>
 /// Contains pre-drawn bitmaps for your window's titlebar.
 /// </summary>
 public sealed class Bitmaps
 {
-	private const int pos = 8;
-	private const float angline = 1.50005f;
+	private const int pos = 11;
+	private static string _instanceId = string.Empty;
+	private const string _chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	// yes btw, I did randomly type character for this id, I was too lazy to code the id generator
+
+	private byte GetColorBrightness(Color c) => (byte)((c.R + c.G + c.B) / 3);
+
+	private Bitmap ConvertFromStream(Stream resStrm) => new Bitmap(resStrm);
+
+	public Bitmaps(string instanceId)
+	{
+		if (instanceId != _instanceId)
+			throw new InvalidOperationException("Bitmaps class must be accessed through the static Instance member and now through constructor.");
+
+		_instanceId = string.Empty;
+		for (int i = 0; i < _chars.Length; i++)
+			_instanceId += _chars[new Random().Next(_chars.Length)];
+	}
 
 	/// <summary>
 	/// An auto-generated instance of the <see cref="Bitmaps"/> type.
 	/// </summary>
-	public static Bitmaps Instance => new Bitmaps();
+	public static Bitmaps Instance => new Bitmaps(_instanceId);
 
 	/// <summary>
 	/// Generates a custom shape in the center of an image.
@@ -21,143 +39,213 @@ public sealed class Bitmaps
 	/// <param name="BmpSize">The width/height (in pixels) of the image's size.</param>
 	/// <param name="BmpColor">The color of the shape drawn on the bitmap.</param>
 	/// <returns>A custom-drawn bitmap.</returns>
-	public Bitmap this[int BmpSize, Color BmpColor, BitmapType BmpType]
+	public Bitmap this[int BmpSize, Color BmpColor, Color BmpBackground, BitmapType BmpType]
 	{
 		get
 		{
 			Bitmap bmp = new Bitmap(BmpSize, BmpSize);
+			Rectangle rect = new Rectangle(0, 0, BmpSize, BmpSize);
 
 			switch (BmpType)
 			{
 				case BitmapType.Close:
-					Point[] line1 = new Point[]
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						new Point(pos, pos),
-						new Point(BmpSize - pos, BmpSize - pos),
-					};
-					Point[] line2 = new Point[]
-					{
-						new Point(pos, BmpSize - pos),
-						new Point(BmpSize - pos, pos),
-					};
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos, rect.X + pos),
+							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos, rect.Y + pos),
+							new Point(rect.X + pos, rect.Y + rect.Height - pos));
 
-					using (Graphics gfx = Graphics.FromImage(bmp))
-					{
-						gfx.SmoothingMode = SmoothingMode.HighQuality;
-						gfx.DrawLines(new Pen(BmpColor, angline), line1);
-						gfx.DrawLines(new Pen(BmpColor, angline), line2);
+						Color alphaC = Color.White;
+						byte alpha = 100;
+						byte brightness = GetColorBrightness(BmpBackground);
+
+						if (brightness > 127)
+						{
+							alphaC = Color.Black;
+							alpha = 120;
+						}
+						else if (brightness <= 127)
+						{
+							alphaC = Color.White;
+							alpha = 100;
+						}
+
+						g.DrawLine(new Pen(Color.FromArgb(alpha, alphaC)),
+							new Point(rect.X + pos, rect.X + pos),
+							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos));
+						g.DrawLine(new Pen(Color.FromArgb(alpha, alphaC)),
+							new Point(rect.X + rect.Width - pos, rect.Y + pos),
+							new Point(rect.X + pos, rect.Y + rect.Height - pos));
 					}
 					break;
 				case BitmapType.Maximize:
-					Point[] box = new Point[]
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						new Point(pos, pos),
-						new Point(pos, BmpSize - pos),
-						new Point(BmpSize - pos, BmpSize - pos),
-						new Point(BmpSize - pos, pos),
-						new Point(pos, pos),
-					};
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
-					{
-						gfx.SmoothingMode = SmoothingMode.None;
-						gfx.DrawLines(new Pen(BmpColor, 1), box);
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos, rect.Y + pos),
+							new Point(rect.X + pos, rect.Y + rect.Height - pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos, rect.Y + rect.Height - pos),
+							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos),
+							new Point(rect.X + rect.Width - pos, rect.Y + pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos, rect.Y + pos),
+							new Point(rect.X + pos, rect.Y + pos));
 					}
 					break;
 				case BitmapType.Minimize:
-					PointF[] plate = new PointF[]
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						new PointF(pos, BmpSize / 2.0f),
-						new PointF(BmpSize - pos, BmpSize / 2.0f),
-					};
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
-					{
-						gfx.SmoothingMode = SmoothingMode.None;
-						gfx.DrawLines(new Pen(BmpColor, 1), plate);
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos, rect.Y + (rect.Width / 2) + 1),
+							new Point(rect.X + rect.Width - pos, rect.Y + (rect.Width / 2) + 1));
 					}
 					break;
 				case BitmapType.Restore:
-					Point[] box_ = new Point[]
-					{
-						new Point(pos, pos + 4),
-						new Point(pos, BmpSize - pos),
-						new Point(BmpSize - pos - 4, BmpSize - pos),
-						new Point(BmpSize - pos - 4, pos + 4),
-						new Point(pos, pos + 4),
-					};
-					Point[] line_ = new Point[]
-					{
-						new Point(pos + 4, pos),
-						new Point(BmpSize - pos, pos),
-					};
-					Point[] line1_ = new Point[]
-					{
-						new Point(BmpSize - pos, pos),
-						new Point(BmpSize - pos, BmpSize - pos - 4),
-					};
+					int spaceDiff = 2;
 
-					using (Graphics gfx = Graphics.FromImage(bmp))
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						gfx.SmoothingMode = SmoothingMode.None;
-						gfx.DrawLines(new Pen(BmpColor, 1), box_);
-						gfx.DrawLines(new Pen(BmpColor, 1), line_);
-						gfx.DrawLines(new Pen(BmpColor, 1), line1_);
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos, rect.Y + pos + spaceDiff),
+							new Point(rect.X + pos, rect.Y + rect.Height - pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos, rect.Y + rect.Height - pos),
+							new Point(rect.X + rect.Width - pos - spaceDiff, rect.Y + rect.Height - pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos - spaceDiff, rect.Y + rect.Height - pos),
+							new Point(rect.X + rect.Width - pos - spaceDiff, rect.Y + pos + spaceDiff));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos - spaceDiff, rect.Y + pos + spaceDiff),
+							new Point(rect.X + pos, rect.Y + pos + spaceDiff));
+
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos + spaceDiff, rect.Y + pos),
+							new Point(rect.X + pos + spaceDiff, rect.Y + pos + spaceDiff));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + pos + spaceDiff, rect.Y + pos),
+							new Point(rect.X + rect.Width - pos, rect.Y + pos));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos, rect.Y + pos),
+							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos - spaceDiff));
+						g.DrawLine(new Pen(BmpColor),
+							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos - spaceDiff),
+							new Point(rect.X + rect.Width - pos - spaceDiff, rect.Y + rect.Height - pos - spaceDiff));
 					}
 					break;
 				case BitmapType.Help:
-					Rectangle textrect1 = new Rectangle(0, -1, BmpSize, BmpSize);
-					Brush textbrush1 = new SolidBrush(BmpColor);
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-						gfx.DrawString("s", new Font("Webdings", 12f), textbrush1, textrect1,
-							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+						Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream("WinTitleBitmaps.CustomBitmaps.question_mark.png");
+
+						int pos2 = (int)(pos * 0.85);
+						Bitmap bmp2 = ConvertFromStream(s);
+
+						ImageAttributes imageAttr = new ImageAttributes();
+						ColorMap clrMap = new ColorMap();
+
+						clrMap.OldColor = Color.Black;
+						clrMap.NewColor = BmpColor;
+
+						ColorMap[] remapeTable = { clrMap };
+						imageAttr.SetRemapTable(remapeTable, ColorAdjustType.Bitmap);
+
+						g.DrawImage(bmp2, new Rectangle(
+							rect.X + pos2, rect.Y + pos2, rect.Width - (pos2 * 2), rect.Height - (pos2 * 2)
+							), 0, 0, bmp2.Width, bmp2.Height, GraphicsUnit.Pixel, imageAttr);
 					}
 					break;
 				case BitmapType.DownArrow:
-					Rectangle textrect2 = new Rectangle(1, 1, BmpSize, BmpSize);
-					Brush textbrush2 = new SolidBrush(BmpColor);
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-						gfx.DrawString("5", new Font("Webdings", 12f), textbrush2, textrect2,
-							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+						Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream("WinTitleBitmaps.CustomBitmaps.down.png");
+
+						int pos2 = (int)(pos * 0.7);
+						Bitmap bmp2 = ConvertFromStream(s);
+
+						ImageAttributes imageAttr = new ImageAttributes();
+						ColorMap clrMap = new ColorMap();
+
+						clrMap.OldColor = Color.Black;
+						clrMap.NewColor = BmpColor;
+
+						ColorMap[] remapeTable = { clrMap };
+						imageAttr.SetRemapTable(remapeTable, ColorAdjustType.Bitmap);
+
+						g.DrawImage(bmp2, new Rectangle(
+							rect.X + pos2, rect.Y + pos2 + 1, rect.Width - (pos2 * 2), rect.Height - (pos2 * 2)
+							), 0, 0, bmp2.Width, bmp2.Height, GraphicsUnit.Pixel, imageAttr);
 					}
 					break;
 				case BitmapType.UpArrow:
-					Rectangle textrect3 = new Rectangle(1, 0, BmpSize, BmpSize);
-					Brush textbrush3 = new SolidBrush(BmpColor);
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-						gfx.DrawString("6", new Font("Webdings", 12f), textbrush3, textrect3,
-							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+						Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream("WinTitleBitmaps.CustomBitmaps.up.png");
+
+						int pos2 = (int)(pos * 0.7);
+						Bitmap bmp2 = ConvertFromStream(s);
+
+						ImageAttributes imageAttr = new ImageAttributes();
+						ColorMap clrMap = new ColorMap();
+
+						clrMap.OldColor = Color.Black;
+						clrMap.NewColor = BmpColor;
+
+						ColorMap[] remapeTable = { clrMap };
+						imageAttr.SetRemapTable(remapeTable, ColorAdjustType.Bitmap);
+
+						g.DrawImage(bmp2, new Rectangle(
+							rect.X + pos2, rect.Y + pos2 + 1, rect.Width - (pos2 * 2), rect.Height - (pos2 * 2)
+							), 0, 0, bmp2.Width, bmp2.Height, GraphicsUnit.Pixel, imageAttr);
 					}
 					break;
 				case BitmapType.LeftArrow:
-					Rectangle textrect4 = new Rectangle(1, 0, BmpSize, BmpSize);
-					Brush textbrush4 = new SolidBrush(BmpColor);
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-						gfx.DrawString("3", new Font("Webdings", 12f), textbrush4, textrect4,
-							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+						Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream("WinTitleBitmaps.CustomBitmaps.left.png");
+
+						int pos2 = (int)(pos * 0.7);
+						Bitmap bmp2 = ConvertFromStream(s);
+
+						ImageAttributes imageAttr = new ImageAttributes();
+						ColorMap clrMap = new ColorMap();
+
+						clrMap.OldColor = Color.Black;
+						clrMap.NewColor = BmpColor;
+
+						ColorMap[] remapeTable = { clrMap };
+						imageAttr.SetRemapTable(remapeTable, ColorAdjustType.Bitmap);
+
+						g.DrawImage(bmp2, new Rectangle(
+							rect.X + pos2, rect.Y + pos2 + 1, rect.Width - (pos2 * 2), rect.Height - (pos2 * 2)
+							), 0, 0, bmp2.Width, bmp2.Height, GraphicsUnit.Pixel, imageAttr);
 					}
 					break;
 				case BitmapType.RightArrow:
-					Rectangle textrect5 = new Rectangle(0, 0, BmpSize, BmpSize);
-					Brush textbrush5 = new SolidBrush(BmpColor);
-
-					using (Graphics gfx = Graphics.FromImage(bmp))
+					using (Graphics g = Graphics.FromImage(bmp))
 					{
-						gfx.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-						gfx.DrawString("4", new Font("Webdings", 12f), textbrush5, textrect5,
-							new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+						Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream("WinTitleBitmaps.CustomBitmaps.right.png");
+
+						int pos2 = (int)(pos * 0.7);
+						Bitmap bmp2 = ConvertFromStream(s);
+
+						ImageAttributes imageAttr = new ImageAttributes();
+						ColorMap clrMap = new ColorMap();
+
+						clrMap.OldColor = Color.Black;
+						clrMap.NewColor = BmpColor;
+
+						ColorMap[] remapeTable = { clrMap };
+						imageAttr.SetRemapTable(remapeTable, ColorAdjustType.Bitmap);
+
+						g.DrawImage(bmp2, new Rectangle(
+							rect.X + pos2, rect.Y + pos2 + 1, rect.Width - (pos2 * 2), rect.Height - (pos2 * 2)
+							), 0, 0, bmp2.Width, bmp2.Height, GraphicsUnit.Pixel, imageAttr);
 					}
 					break;
 			}
