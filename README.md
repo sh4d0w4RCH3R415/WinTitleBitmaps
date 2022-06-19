@@ -6,6 +6,7 @@ Btw, I recommend setting the `SizeMode` of your `PictureBox` to be `PictureBoxSi
 
 ### How To Use
 #### Quick Parameter Documentation
+The bitmap generator method requests a background color so that it can make the caption button image it returns more visible.
 ```csharp
 using System.Drawing;
 
@@ -13,7 +14,7 @@ public sealed class Bitmaps
 {
     public static Bitmaps Instance => new Bitmaps();
 
-    public Bitmap this[int BmpSize, Color BmpColor, BitmapType BmpType]
+    public Bitmap this[int BmpSize, Color BmpColor, Color BmpBackground, BitmapType BmpType]
     {
         /* insert complex drawing code here */
     }
@@ -24,15 +25,15 @@ public sealed class Bitmaps
 using System.Drawing;
 using System.Windows.Forms;
 
-Bitmap close      = Bitmaps.Instance[32, Color.Black, BitmapType.Close     ];
-Bitmap maximize   = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize  ];
-Bitmap minimize   = Bitmaps.Instance[32, Color.Black, BitmapType.Minimize  ];
-Bitmap restore    = Bitmaps.Instance[32, Color.Black, BitmapType.Restore   ];
-Bitmap help       = Bitmaps.Instance[32, Color.Black, BitmapType.Help      ];
-Bitmap downArrow  = Bitmaps.Instance[32, Color.Black, BitmapType.DownArrow ];
-Bitmap upArrow    = Bitmaps.Instance[32, Color.Black, BitmapType.UpArrow   ];
-Bitmap leftArrow  = Bitmaps.Instance[32, Color.Black, BitmapType.LeftArrow ];
-Bitmap rightArrow = Bitmaps.Instance[32, Color.Black, BitmapType.RightArrow];
+Bitmap close      = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Close     ];
+Bitmap maximize   = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Maximize  ];
+Bitmap minimize   = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Minimize  ];
+Bitmap restore    = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Restore   ];
+Bitmap help       = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Help      ];
+Bitmap downArrow  = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.DownArrow ];
+Bitmap upArrow    = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.UpArrow   ];
+Bitmap leftArrow  = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.LeftArrow ];
+Bitmap rightArrow = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.RightArrow];
 
 // just pretend I modified the properties of these PictureBox controls
 PictureBox myPicBox1 = new PictureBox();
