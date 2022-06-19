@@ -1,11 +1,11 @@
-## WinTitleBitmaps
-### Description
+# WinTitleBitmaps
+## Description
 Contains images that were drawn with code free to use for your window's titlebar if its a custom window!<br/>
 
 Btw, I recommend setting the `SizeMode` of your `PictureBox` to be `PictureBoxSizeMode.CenterImage`, just so that it looks normal, and nice.
 
-### How To Use
-#### Quick Parameter Documentation
+## How To Use
+### Quick Parameter Documentation
 The bitmap generator method requests a background color so that it can make the caption button image it returns more visible.
 ```csharp
 using System.Drawing;
@@ -20,7 +20,7 @@ public sealed class Bitmaps
     }
 }
 ```
-#### Actual "How To Use" Code
+### Actual "How To Use" Code
 ```csharp
 using System.Drawing;
 using System.Windows.Forms;
@@ -57,9 +57,9 @@ myPicBox8.Image = leftArrow;
 myPicBox9.Image = rightArrow;
 ```
 
-### Bitmap Generation Results
+## Bitmap Generation Results
 ![](https://raw.githubusercontent.com/sh4d0w4RCH3R415/WinTitleBitmaps/master/screenshot%20of%20bitmaps.jpg)
 ![](https://raw.githubusercontent.com/sh4d0w4RCH3R415/WinTitleBitmaps/master/screenshot%20of%20bitmaps%202.jpg)
 
-### Download
+## Download
 [Standalone](https://github.com/sh4d0w4RCH3R415/releases/download/1.2/WinTitleBitmaps.dll)
