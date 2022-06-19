@@ -57,8 +57,8 @@ myPicBox9.Image = rightArrow;
 ```
 
 ### Bitmap Generation Results
-![](https://github.com/sh4d0w4RCH3R415/WinTitleBitmaps/blob/master/screenshot+of+bitmaps.PNG)
-![](https://github.com/sh4d0w4RCH3R415/WinTitleBitmaps/blob/master/screenshot+of+bitmaps+2.PNG)
+![](https://raw.githubusercontent.com/sh4d0w4RCH3R415/WinTitleBitmaps/master/screenshot%20of%20bitmaps.jpg)
+![](https://raw.githubusercontent.com/sh4d0w4RCH3R415/WinTitleBitmaps/master/screenshot%20of%20bitmaps%202.jpg)
 
 ### Download
 [Standalone](https://github.com/sh4d0w4RCH3R415/releases/download/1.2/WinTitleBitmaps.dll)
