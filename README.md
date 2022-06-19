@@ -10,6 +10,19 @@ The bitmap generator method requests a background color so that it can make the 
 ```csharp
 using System.Drawing;
 
+public enum BitmapType
+{
+    Close,
+    Maximize,
+    Minimize,
+    Restore,
+    Help,
+    DownArrow,
+    UpArrow,
+    LeftArrow,
+    RightArrow,
+}
+
 public sealed class Bitmaps
 {
     public static Bitmaps Instance => new Bitmaps();
