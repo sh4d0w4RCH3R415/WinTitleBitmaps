@@ -46,5 +46,21 @@ namespace Demo
 
 		private void Maximize_MouseEnter(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Restore];
 		private void Maximize_MouseLeave(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Maximize];
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			int x = picClose.Location.X;
+			int y = picClose.Location.Y;
+
+			Cursor.Position = PointToScreen(new Point(x, y));
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			int x = picRightArrow.Location.X + picRightArrow.Width;
+			int y = picRightArrow.Location.Y + picRightArrow.Height;
+
+			Cursor.Position = PointToScreen(new Point(x, y));
+		}
 	}
 }
