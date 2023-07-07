@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
@@ -39,7 +40,7 @@ public sealed class Bitmaps
 	/// <param name="BmpSize">The width/height (in pixels) of the image's size.</param>
 	/// <param name="BmpColor">The color of the shape drawn on the bitmap.</param>
 	/// <returns>A custom-drawn bitmap.</returns>
-	public Bitmap this[int BmpSize, Color BmpColor, Color BmpBackground, BitmapType BmpType]
+	public Bitmap this[int BmpSize, Color BmpColor, BitmapType BmpType]
 	{
 		get
 		{
@@ -51,32 +52,17 @@ public sealed class Bitmaps
 				case BitmapType.Close:
 					using (Graphics g = Graphics.FromImage(bmp))
 					{
+						g.SmoothingMode = SmoothingMode.HighQuality;
 						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + pos, rect.X + pos),
 							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos));
 						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + rect.Width - pos, rect.Y + pos),
 							new Point(rect.X + pos, rect.Y + rect.Height - pos));
-
-						Color alphaC = Color.White;
-						byte alpha = 100;
-						byte brightness = GetColorBrightness(BmpBackground);
-
-						if (brightness > 127)
-						{
-							alphaC = Color.Black;
-							alpha = 120;
-						}
-						else if (brightness <= 127)
-						{
-							alphaC = Color.White;
-							alpha = 100;
-						}
-
-						g.DrawLine(new Pen(Color.FromArgb(alpha, alphaC)),
+						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + pos, rect.X + pos),
 							new Point(rect.X + rect.Width - pos, rect.Y + rect.Height - pos));
-						g.DrawLine(new Pen(Color.FromArgb(alpha, alphaC)),
+						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + rect.Width - pos, rect.Y + pos),
 							new Point(rect.X + pos, rect.Y + rect.Height - pos));
 					}
@@ -84,6 +70,7 @@ public sealed class Bitmaps
 				case BitmapType.Maximize:
 					using (Graphics g = Graphics.FromImage(bmp))
 					{
+						g.SmoothingMode = SmoothingMode.HighQuality;
 						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + pos, rect.Y + pos),
 							new Point(rect.X + pos, rect.Y + rect.Height - pos));
@@ -101,6 +88,7 @@ public sealed class Bitmaps
 				case BitmapType.Minimize:
 					using (Graphics g = Graphics.FromImage(bmp))
 					{
+						g.SmoothingMode = SmoothingMode.HighQuality;
 						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + pos, rect.Y + (rect.Width / 2) + 1),
 							new Point(rect.X + rect.Width - pos, rect.Y + (rect.Width / 2) + 1));
@@ -111,6 +99,7 @@ public sealed class Bitmaps
 
 					using (Graphics g = Graphics.FromImage(bmp))
 					{
+						g.SmoothingMode = SmoothingMode.HighQuality;
 						g.DrawLine(new Pen(BmpColor),
 							new Point(rect.X + pos, rect.Y + pos + spaceDiff),
 							new Point(rect.X + pos, rect.Y + rect.Height - pos));

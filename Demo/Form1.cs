@@ -10,14 +10,14 @@ namespace Demo
 		{
 			InitializeComponent();
 
-			picClose.Image      = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Close     ];
-			picMaximize.Image   = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Maximize  ];
-			picMinimize.Image   = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Minimize  ];
-			picHelp.Image       = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Help      ];
-			picDownArrow.Image  = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.DownArrow ];
-			picUpArrow.Image    = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.UpArrow   ];
-			picLeftArrow.Image  = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.LeftArrow ];
-			picRightArrow.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.RightArrow];
+			picClose.Image      = Bitmaps.Instance[32, Color.Black, BitmapType.Close];
+			picMaximize.Image   = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize];
+			picMinimize.Image   = Bitmaps.Instance[32, Color.Black, BitmapType.Minimize];
+			picHelp.Image       = Bitmaps.Instance[32, Color.Black, BitmapType.Help];
+			picDownArrow.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.DownArrow];
+			picUpArrow.Image    = Bitmaps.Instance[32, Color.Black, BitmapType.UpArrow];
+			picLeftArrow.Image  = Bitmaps.Instance[32, Color.Black, BitmapType.LeftArrow];
+			picRightArrow.Image = Bitmaps.Instance[32, Color.Black, BitmapType.RightArrow];
 			
 			picClose.MouseEnter      += new EventHandler(PictureBox_MouseEnter);
 			picMaximize.MouseEnter   += new EventHandler(PictureBox_MouseEnter);
@@ -44,8 +44,8 @@ namespace Demo
 		private void PictureBox_MouseEnter(object sender, EventArgs e) => ((PictureBox)sender).BackColor = Color.Gainsboro;
 		private void PictureBox_MouseLeave(object sender, EventArgs e) => ((PictureBox)sender).BackColor = Color.White;
 
-		private void Maximize_MouseEnter(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Restore];
-		private void Maximize_MouseLeave(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, Color.White, BitmapType.Maximize];
+		private void Maximize_MouseEnter(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, BitmapType.Restore];
+		private void Maximize_MouseLeave(object sender, EventArgs e) => picMaximize.Image = Bitmaps.Instance[32, Color.Black, BitmapType.Maximize];
 
 		private void button1_Click(object sender, EventArgs e)
 		{
