@@ -75,4 +75,4 @@ myPicBox9.Image = rightArrow;
 ![](https://raw.githubusercontent.com/sh4d0w4RCH3R415/WinTitleBitmaps/master/screenshot%20of%20bitmaps%202.jpg)
 
 ## Download
-[Standalone](https://github.com/sh4d0w4RCH3R415/releases/download/1.2/WinTitleBitmaps.dll)
+[Standalone](https://github.com/sh4d0w4RCH3R415/WinTitleBitmaps/releases/latest/download/WinTitleBitmaps.dll)
